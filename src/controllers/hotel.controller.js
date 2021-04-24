@@ -25,6 +25,7 @@ function create(req,res){
         if(hotelFound) return res.status(200).send({report:'Hotel name exist'});
 
         HotelModel.name = params.nombre;
+        HotelModel.star = params.estrellas;
         HotelModel.manager = params.gerente;
         HotelModel.direction = params.direccion;
 

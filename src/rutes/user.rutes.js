@@ -14,7 +14,6 @@ api.post('/createUser', userController.createUser);
 
 
 
-
 ///////////////////GERENTEHOTEL//////////////////////////////////////
 
 

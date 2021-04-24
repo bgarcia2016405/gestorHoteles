@@ -7,6 +7,7 @@ const roomController = require("../controllers/room.controller");
 var api = express.Router();
 
 api.post('/addRoom', authenticated.ensureAuth, roomController.add);
+api.get('/showRoomHotel/:IDhotel', authenticated.ensureAuth, roomController.showRoomHotel);
 
 
 

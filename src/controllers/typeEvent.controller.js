@@ -44,7 +44,22 @@ function add(req,res){
 
 }
 
+///////////////////////USER//////////////////////////////////////
+function showEventsHotel(req,res){
+    var IDhotel = req.params.IDhotel;
+
+    typeEventModel.find({hotel:IDhotel},(err,typesEventsFound)=>{
+        if(err) return res.status(404).send({report: 'Error in find typeError'});
+
+        if(!typesEventsFound) return res.status(200).send({report: 'Type Event not exis'});
+
+        return res.status(200).send(typesEventsFound);
+    })
+    
+}
+
 
 module.exports = {
-    add
+    add,
+    showEventsHotel
 }

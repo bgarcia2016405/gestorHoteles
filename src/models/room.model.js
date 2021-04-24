@@ -8,7 +8,6 @@ var RoomSchema = Schema({
     beds: Number,
     persons: Number,
     price: Number,
-    star: Number,
     description: String
 });
 

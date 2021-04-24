@@ -26,7 +26,6 @@ function add(req,res){
     RoomModel.beds = params.camas;
     RoomModel.hotel = params.hotel;
     RoomModel.price = params.presio;
-    RoomModel.star = params.estrellas;
     RoomModel.persons = params.personas;
     RoomModel.description = params.descripcion;
 
@@ -42,6 +41,20 @@ function add(req,res){
     
 }
 
+/////////////////////////Usuario////////////////////////////////////////////
+function showRoomHotel(req,res){
+    var IDhotel = req.params.IDhotel;
+
+    roomModel.find({hotel:IDhotel},(err,roomsFound)=>{
+        if(err) return res.status(404).send({report:'Error find rooms'});
+
+        if(!roomsFound) return res.status(200).send({report:'Hotel rooms not exist'});
+
+        return res.status(202).send(roomsFound);
+    })
+}
+
 module.exports = {
-    add
+    add,
+    showRoomHotel
 }

@@ -81,6 +81,17 @@ function createUser(req,res){
     }
 }
 
+function editUser(req,res){
+    var params = req.body;
+    var validation = req.user.type;
+    var user = req.user.sub;
+
+    if(validation != user) return res.status(400).send({report:'You not are user'});
+
+    
+
+}
+
 ////////////////////////////MANAGER////////////////////////////////////////////////////////  
 
 
@@ -102,5 +113,6 @@ function showAllUsers(req,res){
 module.exports = {
     Login,
     createUser,
-    showAllUsers
+    showAllUsers,
+    editUser
 }
