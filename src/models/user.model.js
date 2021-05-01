@@ -4,9 +4,14 @@ const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var UserSchema = Schema({
-    user:String,
+    lastName: String,
     password:String,
-    type:String
+    email:String,
+    name:String,
+    user:String,
+    type:String,
+    age:Number
+
     //poner muchos más datos personales para el usuario en general.
 })
 

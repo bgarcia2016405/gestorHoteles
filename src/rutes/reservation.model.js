@@ -8,5 +8,6 @@ var api = express.Router();
 
 api.post('/reservation', authenticated.ensureAuth, reservationControllor.reservation);
 
+api.get('/showReservation', authenticated.ensureAuth, reservationControllor.showReservation);
 
 module.exports = api;

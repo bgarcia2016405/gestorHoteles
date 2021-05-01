@@ -11,8 +11,9 @@ api.post('/Login', userController.Login);
 /////////////////////USUARIO/////////////////////////////////////////
 api.post('/createUser', userController.createUser);
 
+api.put('/editUser', authenticated.ensureAuth, userController.editUser);
 
-
+api.delete('/dropUser', authenticated.ensureAuth, userController.dropUser);
 
 ///////////////////GERENTEHOTEL//////////////////////////////////////
 

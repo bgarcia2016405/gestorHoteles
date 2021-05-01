@@ -46,8 +46,8 @@ function createUser(req,res){
 
     delete params.rol
 
-    if(params.nombre && params.password){
-        userModel.findOne({ user : params.nombre}).exec((err,userFound)=>{
+    if(params.Usuario && params.password){
+        userModel.findOne({ user : params.Usuario}).exec((err,userFound)=>{
 
             if(err) return res.status(404).send({report: 'Error in find user'});
 
@@ -55,7 +55,11 @@ function createUser(req,res){
                 return res.status(202).send({report: 'user exist'});
             
             }else{
-                UserModel.user = params.nombre;
+                UserModel.user = params.Usuario;
+                UserModel.lastName = params.Apellido;
+                UserModel.name = params.nombre;
+                UserModel.age = params.Edad;
+                UserModel.email = params.correo;
                 UserModel.type = user;
                 bcrypt.hash(params.password, null, null, (err, encryptedPassword)=>{
 
@@ -81,15 +85,29 @@ function createUser(req,res){
     }
 }
 
+
 function editUser(req,res){
     var params = req.body;
-    var validation = req.user.type;
     var user = req.user.sub;
 
-    if(validation != user) return res.status(400).send({report:'You not are user'});
+    userModel.findById(user, params,{new: true, useFindAndModify:false} ,(err,userEdit)=>{
+        if(err) return res.status(404).send({report:"Error in edit user"});
 
-    
+        if(!userEdit) return res.status(200).send({report:"User has not edit"});
 
+        return res.status(200).send(userEdit)
+    }) 
+}
+
+function dropUser(req,res){
+    var user = req.user.sub;
+    userModel.findByIdAndDelete(user, (err,UserDrop)=>{
+        if(err) return res.status(404).send({report:'Error in delete product'});
+
+        if(!UserDrop) return res.status(402).send({report:'User dont exist'});
+
+        return res.status(200).send(UserDrop);
+    })
 }
 
 ////////////////////////////MANAGER////////////////////////////////////////////////////////  
@@ -111,8 +129,10 @@ function showAllUsers(req,res){
     }
 }
 module.exports = {
-    Login,
-    createUser,
     showAllUsers,
-    editUser
+    createUser,
+    dropUser,
+    editUser,
+    Login
+
 }

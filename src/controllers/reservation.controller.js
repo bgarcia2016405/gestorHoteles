@@ -4,6 +4,7 @@ const jwt = require('../service/jwt');
 const bcrypt = require("bcrypt-nodejs");
 
 const reservationModel = require("../models/reservation.model");
+const hotelModel = require("../models/hotel.model");
 const roomModel = require("../models/room.model");
 
 
@@ -16,7 +17,6 @@ const admin = 'Administrador';
 function reservation(req,res){
     var params = req.body;
     var user = req.user.sub;
-    var validation = req.user.type;
     var ReservationModel = new reservationModel();
 
     roomModel.findById(params.Cuarto, (err,roomFound)=>{
@@ -40,7 +40,39 @@ function reservation(req,res){
     })
 }
 
+///////////////////////MANAGER//////////////////////////////////////
+function showReservation(req,res){
+    var user = req.user.sub;
+    var validation = req.user.type;
+
+    if(validation != manager) return res.status(400).sedn({report:'You are not manager'});
+
+    hotelModel.findOne({manager:user}, (err,hotelFound)=>{
+        if(err) return res.status(404).send({report:'Error in find hotel'});
+
+        if(!hotelFound) return res.status(402).sedn({report:'Hotel not exist'});
+
+        roomModel.find({hotel:hotelFound._id},(err,roomFound)=>{
+            if(err) return res.status(404).send({report:'Error in find room'});
+
+            if(!roomFound) return res.status(402).sedn({report:'Rooms not exist'});
+
+            roomFound.forEach((showId)=>{
+                
+                reservationModel.find({room:showId._id}, (err,reservationFound)=>{
+                    if(err) return res.status(404).send({report:'Error in show reservations'});
+                    
+                    return res.status(200).send(reservationFound)
+                })
+            })
+            
+        })
+
+       
+    })
+}
 
 module.exports = {
+    showReservation,
     reservation
 }
