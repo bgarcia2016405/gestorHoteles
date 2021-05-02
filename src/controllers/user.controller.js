@@ -25,7 +25,7 @@ function Login(req,res){
 
                  if(Valid) {
 
-                     return res.status(200).send({ token: jwt.createToken(userFound)}  );
+                     return res.status(200).send({ token: jwt.createToken(userFound), userFound}  );
                 
                  }else {
 

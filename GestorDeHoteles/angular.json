@@ -28,9 +28,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -67,6 +71,9 @@
           "options": {
             "browserTarget": "GestorDeHoteles:build"
           },
+          "assets": [
+            "src/assets"
+         ],
           "configurations": {
             "production": {
               "browserTarget": "GestorDeHoteles:build:production"
