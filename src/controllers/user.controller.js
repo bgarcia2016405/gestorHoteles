@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt-nodejs");
 
 const userModel = require("../models/user.model");
 
+
 const user = 'Cliente';
 const manager = 'Gerente';
 const admin = 'Administrador';
@@ -46,8 +47,8 @@ function createUser(req,res){
 
     delete params.rol
 
-    if(params.Usuario && params.password){
-        userModel.findOne({ user : params.Usuario}).exec((err,userFound)=>{
+    if(params.user && params.password){
+        userModel.findOne({ user : params.user}).exec((err,userFound)=>{
 
             if(err) return res.status(404).send({report: 'Error in find user'});
 
@@ -55,11 +56,11 @@ function createUser(req,res){
                 return res.status(202).send({report: 'user exist'});
             
             }else{
-                UserModel.user = params.Usuario;
-                UserModel.lastName = params.Apellido;
-                UserModel.name = params.nombre;
-                UserModel.age = params.Edad;
-                UserModel.email = params.correo;
+                UserModel.user = params.user;
+                UserModel.lastName = params.lastName;
+                UserModel.name = params.name;
+                UserModel.age = params.age;
+                UserModel.email = params.email;
                 UserModel.type = user;
                 bcrypt.hash(params.password, null, null, (err, encryptedPassword)=>{
 
@@ -112,6 +113,11 @@ function dropUser(req,res){
 
 ////////////////////////////MANAGER////////////////////////////////////////////////////////  
 
+function findUserHotel(req, res){
+    var user = req.user.sub;
+
+
+}
 
 ////////////////////////////ADMINISTRADOR/////////////////////////////////////////////////
 

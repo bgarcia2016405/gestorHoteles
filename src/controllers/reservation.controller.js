@@ -29,6 +29,10 @@ function reservation(req,res){
         ReservationModel.room = params.Cuarto;
         ReservationModel.checkIn = params.Entrada;
         ReservationModel.checkOut = params.Salida;
+
+       //////////// cumpleanos = new Date(params.Entrada);
+         ///////////////////////////////////////////////////////////////////////
+       //////// return console.log( 'Para el frontent resolver la fecha'  );
         
         ReservationModel.save((err,reservationSave)=>{
             if(err) return res.status(404).send({report: 'reservation requiest error'});
@@ -55,12 +59,14 @@ function showReservation(req,res){
         roomModel.find({hotel:hotelFound._id},(err,roomFound)=>{
             if(err) return res.status(404).send({report:'Error in find room'});
 
-            if(!roomFound) return res.status(402).sedn({report:'Rooms not exist'});
+            if(roomFound == '') return res.status(402).send({report:'Rooms not exist'});
 
             roomFound.forEach((showId)=>{
-                
+
                 reservationModel.find({room:showId._id}, (err,reservationFound)=>{
                     if(err) return res.status(404).send({report:'Error in show reservations'});
+
+                    if(!reservationFound) return res.status(404).send({report:'Reservation not Found'})
                     
                     return res.status(200).send(reservationFound)
                 })

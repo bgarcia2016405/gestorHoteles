@@ -27,8 +27,10 @@ export class NavbarComponent implements OnInit {
   }
 
   login(){
+
     this.userService.login(this.userModel).subscribe(
       response=>{
+        console.log(response)
         this.identidad = response.userFound
         localStorage.setItem('identidad', JSON.stringify(this.identidad))
         this.getToken();
@@ -36,7 +38,7 @@ export class NavbarComponent implements OnInit {
       error=>{
         console.log(<any>error);
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'error',
           title: 'Email o contraseña incorrecto',
           showConfirmButton: false,
@@ -52,7 +54,7 @@ export class NavbarComponent implements OnInit {
         this.token=response.token;
         localStorage.setItem('token', this.token);
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'success',
           title: 'Email o contraseña incorrecto',
           showConfirmButton: false,

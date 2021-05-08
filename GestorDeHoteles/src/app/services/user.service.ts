@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { GLOBAL } from './global.service';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,12 @@ export class UserService {
     }else{
        this.identidad = null;
     }
-
     return this.identidad;
+ }
+
+ registro(usuario: User): Observable<any>{
+  let params = JSON.stringify(usuario);
+
+  return this.http.post(this.url + '/createUser', params, {headers: this.headers})
  }
 }
