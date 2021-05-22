@@ -8,6 +8,8 @@ var api = express.Router();
 
 api.post('/createHotel', authenticated.ensureAuth ,hotelController.create)
 
+api.get('/showHotels', hotelController.showHotels);
 
+api.get('/showHotel', authenticated.ensureAuth, hotelController.showHotel)
 
 module.exports = api;

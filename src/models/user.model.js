@@ -10,7 +10,7 @@ var UserSchema = Schema({
     name:String,
     user:String,
     type:String,
-    age:Number
+    age:String
 
     //poner muchos más datos personales para el usuario en general.
 })

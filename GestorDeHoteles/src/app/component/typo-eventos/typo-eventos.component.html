@@ -1,0 +1,133 @@
+<div class="container">
+  <div >
+    <h1>Hotel {{hotelPosrt.name}}</h1>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="{{hotelPosrt.imagen}}" alt="" class="img-thumbnail">
+    </div>
+
+
+    <div class="col">
+
+      <br>
+      <form>
+
+        <div class="form-floating" >
+          <select class="form-select" id="name" name="name"  #name="ngModel" [(ngModel)]="typoEvento.name">
+  <option value="Cumple Años">Cumple Años</option>
+  <option value="Bodas">Bodas</option>
+  <option value="Conferencia">Conferencia</option>
+  <option value="Evento Cultural">Evento Cultural</option>
+  <option value="Evento Gastronómico">Evento Gastronómico</option>
+  <option value="Fiestas">Fiestas</option>
+  <option value="Evento Religioso">Evento Religioso</option>
+          </select>
+          <label for="name">Eventos</label>
+        </div><br>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Q</span>
+          <span class="input-group-text">0.00</span>
+          <input type="Number" class="form-control" id="price" name="price"  #price="ngModel" [(ngModel)]="typoEvento.price" >
+        </div>
+        <button class="btn  btn-success" type="button" (click)="evento()" data-bs-dismiss="modal">Agregar</button>
+      </form>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-1">
+
+    </div>
+    <div class="col">
+      <table class="table table-dark table-striped">
+
+        <thead>
+
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tp of taa; let i = index">
+            <th scope="row">{{i}}</th>
+            <td >{{tp.name}}</td>
+            <td>Q{{tp.price}}</td>
+
+              <td>
+                <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#edit" (click)="showId(tp._id)">Editar</button>
+                <button type="button" class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#drop" (click)="showId(tp._id)">Eliminar</button>
+              </td>
+
+
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+    <div class="col-1">
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal  " id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="staticBackdropLabel">{{typoEvento.name}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price"
+            price="nombre" #price="ngModel" [(ngModel)]="typoEvento.price">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn  btn-outline-info" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="editarEvento(typoEvento._id)">Editar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal  " id="drop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="staticBackdropLabel" style="text-align:center">¿Quieres borrar este evento?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align:center">
+        <h1>Evento</h1>
+        <h3  id="staticBackdropLabel">{{typoEvento.name}}</h3>
+        <h1>Precio</h1>
+       <h3 >Q{{typoEvento.price}} </h3>
+      </div>
+      <div class="modal-footer">
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-warning" type="button" data-bs-dismiss="modal" (click)="dropEvento(typoEvento._id)">Si</button>
+          <button class="btn btn-info" type="button" data-bs-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

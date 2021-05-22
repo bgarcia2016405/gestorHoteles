@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg ">
   <div class="container-fluid">
 
     <a class="navbar-brand " >
@@ -15,32 +15,44 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent" >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link"  data-bs-toggle="modal"
-          data-bs-target="#modelLogin"><i class="bi bi-door-open-fill"></i> Login</a>
+
+        <li *ngIf="identidad.type === 'Administrador'">
+          <a class="nav-link" routerLink="/registroHoteles"  >Registrar Hoteles</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/registro"  >Registro</a>
+        <li *ngIf="identidad.type === 'Gerente'">
+          <a class="nav-link" routerLink="/servicios"  >Servicios</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/usaurio"  >Usuarios</a>
+        <li *ngIf="identidad.type === 'Gerente'">
+          <a class="nav-link" routerLink="/tipoEventos"  >Evento</a>
+        </li>
+        <li *ngIf="identidad.type === 'Gerente'">
+          <a class="nav-link" routerLink="/cuarto"  >Habitación</a>
+        </li>
+        <li *ngIf="identidad.type === 'Gerente'">
+          <a class="nav-link" routerLink="/cuarto"  >Mi Hotel</a>
         </li>
       </ul>
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-outline-light dropdown-toggle" style="color:black" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+{{identidad.user}}
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li class="nav-item">
+            <a class="nav-link"  data-bs-toggle="modal"
+            data-bs-target="#modelLogin"><i class="bi bi-door-open-fill"></i> Login</a>
+          </li>
+          <li><a class="dropdown-item" [routerLink]="['/cuenta', identidad._id]" >Cuenta</a></li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/registro"  >Registro</a>
+          </li>
+          <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
         </ul>
       </div>
-
       <div >
         <img src="https://www.alohacriticon.com/wp-content/uploads/2017/03/morgan-freeman-foto-biografia.jpg" style="border-radius:150px;"
         width="50">
       </div>
-
 
     </div>
   </div>

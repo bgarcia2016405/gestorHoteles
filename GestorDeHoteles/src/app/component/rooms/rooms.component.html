@@ -1,0 +1,64 @@
+
+
+
+
+<div class="container">
+
+  <div class="row">
+
+
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="container">
+<form>
+      <div class="row">
+
+
+    <div class="col">
+
+      <div>
+
+  <mat-form-field>
+  <input matInput [matDatepicker]="hooa" placeholder="Entrada" name="CheckIn"  #CheckIn="ngModel" [(ngModel)]="datet.CheckIn"  >
+  <mat-datepicker-toggle matSuffix [for]="hooa" ></mat-datepicker-toggle>
+  <mat-datepicker #hooa ></mat-datepicker>
+</mat-form-field>
+</div>
+</div>
+
+<div class="col">
+      <div>
+        <mat-form-field>
+        <input matInput [matDatepicker]="salida" placeholder="Salida" name="CheckOut"  #CheckOut="ngModel" [(ngModel)]="datet.CheckOut"  >
+        <mat-datepicker-toggle matSuffix [for]="salida" ></mat-datepicker-toggle>
+        <mat-datepicker #salida ></mat-datepicker>
+      </mat-form-field>
+      </div>
+
+    </div>
+    <div class="col">
+<button class="btn btn-outline-info" (click)="buscarCuarto()"><i class="bi bi-search"></i></button>
+    </div>
+
+
+        </div>
+      </form>
+   </div>
+
+  </div>
+
+  <div class="row">
+
+
+
+  </div>
+
+
+</div>
+
+
+

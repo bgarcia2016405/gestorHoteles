@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-5">
+     <!-- <form (ngSubmit)="registrar()"> -->
+        <form>
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+
+            <input type="text" class="form-control" id="name" name="name"
+            #name="ngModel" [(ngModel)]="cuentaModel.name" disabled >
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="lastName" name="lastName"
+            #lastName="ngModel" [(ngModel)]="cuentaModel.lastName" disabled >
+          </div>
+          <div class="mb-3">
+            <label for="user" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="user" name="user"
+            #user="ngModel" [(ngModel)]="cuentaModel.user" disabled >
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" name="email"
+            #email="ngModel" [(ngModel)]="cuentaModel.email" disabled >
+          </div>
+          <div class="mb-3">
+            <label for="age" class="form-label">Nacimiento</label>
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" name="age" #age="ngModel" [(ngModel)]="cuentaModel.age" disabled>
+                <mat-datepicker-toggle matSuffix [for]="picker" disabled></mat-datepicker-toggle >
+                <mat-datepicker #picker ></mat-datepicker>
+              </mat-form-field>
+          </div>
+          </div>
+          <div class="mb-3">
+            <label for="type" class="form-label">Tipo</label>
+            <input type="text" class="form-control" id="type" name="type"
+            #type="ngModel" [(ngModel)]="cuentaModel.type" disabled >
+          </div>
+          <div>
+        </div>
+          <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <button type="button" class="btn btn-outline-primary"
+            data-bs-toggle="modal" data-bs-target="#editModal">Editar</button>
+            <button type="button" class="btn btn-outline-danger"
+            data-bs-toggle="modal" data-bs-target="#eliminarModal" (click)="obtenerUsuario(cuentaModel._id)">Eliminar</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="name" name="name"
+          #name="ngModel" [(ngModel)]="cuentaModel.name"  >
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="lastName" name="lastName"
+          #lastName="ngModel" [(ngModel)]="cuentaModel.lastName"  >
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" id="email" name="email"
+          #email="ngModel" [(ngModel)]="cuentaModel.email"  >
+        </div>
+
+          <div>
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editarUsuario()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align:center">
+        <h1>¿Quieres Eliminar Tu Cuenta?</h1>
+        <h2>{{cuentaModel.user}}</h2>
+        <div class="d-grid gap-2">
+          <button class="btn btn-success" type="button" data-bs-dismiss="modal">No</button>
+          <button class="btn btn-warning" type="button" data-bs-dismiss="modal"
+          routerLink=""
+          (click)="eliminarUsuario(cuentaModel._id)">Si</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

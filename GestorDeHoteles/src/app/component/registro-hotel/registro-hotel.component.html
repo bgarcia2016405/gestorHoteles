@@ -1,0 +1,101 @@
+<div class="container">
+  <form>
+  <div class="row">
+
+    <div class="col">
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" name="name"  #name="ngModel" [(ngModel)]="hotelModelAdd.name">
+        <label for="floatingInput">Nombre</label>
+      </div>
+<br>
+
+      <div class="form-floating" >
+        <select class="form-select" id="manager" name="manager" #manager="ngModel" [(ngModel)]="hotelModelAdd.manager">
+          <option  *ngFor="let user of userModelGet" value="{{user._id}}">{{user.user}}</option>
+        </select>
+        <label for="manager">Manager</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+        </div>
+      </div>
+
+      <input type="range" class="form-range" min="1" max="5" id="star" name="star"  #star="ngModel" [(ngModel)]="hotelModelAdd.star">
+
+      <br>
+
+
+<br>
+<br>
+
+<div class="form-floating">
+  <textarea class="form-control" placeholder="Leave a comment here" id="imagen" name="imagen"  #imagen="ngModel" [(ngModel)]="hotelModelAdd.imagen"></textarea>
+  <label for="floatingTextarea">Imagen</label>
+</div>
+
+    </div>
+
+
+    <div class="col">
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="direction" name="direction"  #direction="ngModel" [(ngModel)]="hotelModelAdd.direction" >
+        <label for="floatingInput">Dirección</label>
+      </div><br>
+
+      <div class="form-floating" >
+        <select class="form-select" id="city" name="city" #city="ngModel" [(ngModel)]="hotelModelAdd.city">
+<option value="Alta Verapaz">Alta Verapaz</option>
+<option value="Baja Verapaz">Baja Verapaz</option>
+<option value="Chimaltenango">Chimaltenango</option>
+<option value="Chiquimula">Chiquimula</option>
+<option value="El Progreso">El Progreso</option>
+<option value="Escuintla">Escuintla</option>
+<option value="Guatemala">Guatemala</option>
+<option value="Huehuetenango">Huehuetenango</option>
+<option value="Izabal">Izabal</option>
+<option value="Jalapa">Jalapa</option>
+<option value="Jutiapa">Jutiapa</option>
+<option value="Petén">Petén</option>
+<option value="Quetzaltenango">Quetzaltenango</option>
+<option value="Quiché">Quiché</option>
+<option value="Retalhuleu">Retalhuleu</option>
+<option value="Sacatepéquez">Sacatepéquez</option>
+<option value="San Marcos">San Marcos</option>
+<option value="Santa Rosa">Santa Rosa</option>
+<option value="Sololá">Sololá</option>
+<option value="Suchitepéquez">Suchitepéquez</option>
+<option value="Totonicapán">Totonicapán</option>
+<option value="Zacapa">Zacapa</option>
+
+        </select>
+        <label for="floatingSelect">Departamento</label>
+      </div>
+
+
+    </div>
+
+
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary" (click)="registrar()" routerLink="/hoteles">Registrar</button>
+</form>
+</div>

@@ -23,10 +23,13 @@
           <label for="Correo" class="form-label">Email</label>
           <input type="email" class="form-control" id="Correo" name="Correo" #Correo="ngModel" [(ngModel)]="user.email">
         </div>
-        <div class="mb-3">
-          <label for="Edad" class="form-label">Edad</label>
-          <input type="number" class="form-control" id="Edad" name="Edad" #Edad="ngModel" [(ngModel)]="user.age">
-        </div>
+        <div>
+          <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" name="age" #age="ngModel" [(ngModel)]="user.age"  >
+          <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+          <mat-datepicker #picker ></mat-datepicker>
+        </mat-form-field>
+      </div>
         <button type="submit" class="btn btn-primary" (click)="registrar()" routerLink="">Registrar</button>
       </form>
     </div>

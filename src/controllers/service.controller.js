@@ -26,8 +26,8 @@ function add(req,res){
         if(!hotelFound) return res.status(202).send({report: 'Hotel not exist'});
 
         ServiceModel.hotel = hotelFound._id;
-        ServiceModel.service = params.sevicio;
-        ServiceModel.price = params.precio;
+        ServiceModel.service = params.service;
+        ServiceModel.price = params.price;
         
         
         ServiceModel.save((err,serviceSave)=>{
@@ -66,7 +66,72 @@ function serviceReservation(req,res){
 
 }
 
+function showId(req,res){
+    var idService = req.params.idService
+        serviceModel.findById(idService,(err,serviceFound)=>{
+            if(err) return res.status(404).send({report: 'service requiest error'});
+
+            if(!serviceFound) return res.status(202).send({report: 'room dont exist'});
+
+            return res.status(200).send(serviceFound);
+        })
+    
+}
+
+function showService(req, res) {
+    var idHotel = req.params.idHotel;
+
+    serviceModel.find({hotel:idHotel},(err,serviceFound)=>{
+        if(err) return res.status(404).send({report: 'service requiest error'});
+
+        if(!serviceFound) return res.status(202).send({report: 'service not exist'});
+    
+        return res.status(200).send(serviceFound);
+    })
+}
+
+function editService(req,res){
+    var idService = req.params.idService;
+    var params = req.body
+
+    serviceModel.findByIdAndUpdate(idService,params, (err,serviceEdit)=>{
+        if(err) return res.status(404).send({report: 'room requiest error'});
+
+        if(!serviceEdit) return res.status(202).send({report: 'room dont exist'});
+
+        return res.status(200).send(serviceEdit);
+    })
+}
+
+function dropService(req,res){
+    var idService = req.params.idService;
+
+    serviceModel.findByIdAndDelete(idService, (err,serviceDeleted)=>{
+        if(err) return res.status(404).send({report: 'room requiest error'});
+
+        if(!serviceDeleted) return res.status(202).send({report: 'room dont exist'});
+
+        return res.status(200).send(serviceDeleted)
+    })
+}
+
+function showServiceHotel(req,res){
+
+    hotelModel.findOne({manager:req.user.sub},{service:1,_id:0}, (err,serviceFound)=>{
+      if(err) return res.status(404).send({report:'Error in find service'});
+      if(!serviceFound) return res.status(202).send({report:'hotel not have service'});
+      return res.status(200).send(serviceFound);
+    })
+}
+
+
+
 module.exports = {
     add,
-    serviceReservation
+    serviceReservation,
+    showServiceHotel,
+    showId,
+    showService,
+    editService,
+    dropService
 }

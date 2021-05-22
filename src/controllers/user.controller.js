@@ -13,7 +13,7 @@ const admin = 'Administrador';
 function Login(req,res){
     var params = req.body;
     
-    userModel.findOne({ user : params.usuario }, (err, userFound)=>{
+    userModel.findOne({ user : params.user }, (err, userFound)=>{
         if(err) return res.status(404).send({ report: 'Error at Login'});
 
         if(!userFound) return res.status(404).send({ report: 'user dosent exist'});
@@ -91,7 +91,8 @@ function editUser(req,res){
     var params = req.body;
     var user = req.user.sub;
 
-    userModel.findById(user, params,{new: true, useFindAndModify:false} ,(err,userEdit)=>{
+    userModel.findByIdAndUpdate(user, params,{new: true, useFindAndModify:false} ,(err,userEdit)=>{
+      
         if(err) return res.status(404).send({report:"Error in edit user"});
 
         if(!userEdit) return res.status(200).send({report:"User has not edit"});
@@ -111,12 +112,30 @@ function dropUser(req,res){
     })
 }
 
+function findUserId(req,res){
+    var idUsuario = req.params.idUsuario
+
+    userModel.findById(idUsuario, (err,userFound)=>{
+        if(err) return res.status(404).send({report:'Error in fidn user'});
+        if(!userFound) return res.status(200).send({report:'User dont exist'});
+        return res.status(200).send(userFound);
+    })
+}
+
 ////////////////////////////MANAGER////////////////////////////////////////////////////////  
 
 function findUserHotel(req, res){
     var user = req.user.sub;
 
 
+}
+
+function findUserManager(req,res){
+    userModel.find({type:user}, (err, userFound)=>{
+        if(err) return res.status(404).send({report:'Error in fidn user'});
+        if(!userFound) return res.status(200).send({report:'User dont exist'});
+        return res.status(200).send(userFound);
+    })
 }
 
 ////////////////////////////ADMINISTRADOR/////////////////////////////////////////////////
@@ -135,8 +154,10 @@ function showAllUsers(req,res){
     }
 }
 module.exports = {
+    findUserManager,
     showAllUsers,
     createUser,
+    findUserId,
     dropUser,
     editUser,
     Login

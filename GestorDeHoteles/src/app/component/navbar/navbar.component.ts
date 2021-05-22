@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   constructor(public userService:UserService,
     private router:Router) {
       this.identidad = this.userService.getIdentidad();
-      this.userModel = new User("","","","","","","",0);
+      this.userModel = new User("","","","","","","","");
 
    }
 
@@ -62,6 +62,10 @@ export class NavbarComponent implements OnInit {
         })
       }
     )
+  }
+
+  navegarCuenta(idUsuario){
+    this.router.navigate(['/cuenta', idUsuario])
   }
 }
 

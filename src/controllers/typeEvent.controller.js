@@ -26,21 +26,81 @@ function add(req,res){
 
         if(!hotelFound) return res.status(202).send({report:'Hotel not exist'});
 
-        TypeEventModel.name = params.evento;
-        TypeEventModel.price = params.precio;
+        TypeEventModel.name = params.name;
+        TypeEventModel.price = params.price;
         TypeEventModel.hotel = hotelFound._id;
 
-        TypeEventModel.save((err,typeEventSave)=>{
+        typeEventModel.findOne({name:params.name,hotel: hotelFound._id},(err, type)=> {
 
             if(err) return res.status(404).send({report: 'type event requiest error'});
 
-            if(!typeEventSave) return res.status(202).send({report: 'type event dont save'});
+            if(!type){
+              TypeEventModel.save((err,typeEventSave)=>{
 
-            return res.status(200).send(typeEventSave);
+                if(err) return res.status(404).send({report: 'type event requiest error'});
+    
+                if(!typeEventSave) return res.status(202).send({report: 'type event dont save'});
+    
+                return res.status(200).send(typeEventSave);
+    
+            });
+    
 
-        });
+            }else{
+              return res.status(404).send(type);
+            }
 
+        
     });
+})
+}
+
+function edit(req,res) {
+    var params = req.body;
+    var idTypoServicio = req.params.idTypoServicio
+    var validation = req.user.type;
+    
+    if(validation =! manager)  return res.status(404).send({report: 'You are not Manager'});
+
+    typeEventModel.findByIdAndUpdate(idTypoServicio,params,(err,typeEventEdit)=>{
+                if(err) return res.status(404).send({report: 'type event requiest error'});
+    
+                if(!typeEventEdit) return res.status(202).send({report: 'type event dont edit'});
+    
+                return res.status(200).send(typeEventEdit);
+
+
+    })
+
+}
+
+function show(req,res){
+    var idTypoServicio = req.params.idTypoServicio; 
+
+    typeEventModel.findById(idTypoServicio,(err,typeEvent)=>{
+        if(err) return res.status(404).send({report: 'type event requiest error'});
+    
+        if(!typeEvent) return res.status(404).send({report: 'type event dont drop'});
+
+        return res.status(200).send(typeEvent);
+        
+    })
+}
+
+function drop(req,res){
+    var idTypoServicio = req.params.idTypoServicio;
+    var validation = req.user.type;
+
+    if(validation =! manager)  return res.status(404).send({report: 'You are not Manager'});
+
+    typeEventModel.findByIdAndDelete(idTypoServicio, (err, typeEventDrop)=>{
+        if(err) return res.status(404).send({report: 'type event requiest error'});
+    
+        if(!typeEventDrop) return res.status(202).send({report: 'type event dont drop'});
+
+        return res.status(200).send(typeEventDrop);
+
+    })
 
 }
 
@@ -56,10 +116,14 @@ function showEventsHotel(req,res){
         return res.status(200).send(typesEventsFound);
     })
     
+
 }
 
 
 module.exports = {
     add,
-    showEventsHotel
+    showEventsHotel,
+    edit,
+    drop,
+    show
 }

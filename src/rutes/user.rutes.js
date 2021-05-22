@@ -15,8 +15,11 @@ api.put('/editUser', authenticated.ensureAuth, userController.editUser);
 
 api.delete('/dropUser', authenticated.ensureAuth, userController.dropUser);
 
+api.get('/showUserId/:idUsuario', userController.findUserId)
+
 ///////////////////GERENTEHOTEL//////////////////////////////////////
 
+api.get('/userManager', userController.findUserManager);
 
 ///////////////////ADMINISTRADOR//////////////////////////////////////
 api.get('/showAllUser', authenticated.ensureAuth, userController.showAllUsers)

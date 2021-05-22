@@ -1,0 +1,66 @@
+
+
+
+<div>
+  <div style="margin-top:30px" class="card" *ngFor="let hot of hotelModelGet; let i = index " >
+  <div class="card-header">
+    <h2 style="width:max-content; height: max-content; float:left">Hotel {{hot.name}}</h2>
+      <div style="width:max-content; height: max-content;float: right;">
+         <i *ngIf="hot.star >= 1" class="bi bi-star-fill "></i>
+          <i *ngIf="hot.star >= 2" class="bi bi-star-fill "></i>
+          <i *ngIf="hot.star >= 3" class="bi bi-star-fill " ></i>
+          <i *ngIf="hot.star >= 4" class="bi bi-star-fill "></i>
+          <i *ngIf="hot.star >= 5" class="bi bi-star-fill "></i></div>
+      </div>
+
+
+
+  <div class="card-body">
+    <img src="{{hot.imagen}}" class="rounded float-end" style="width: 50%;float: right;">
+    <h3 class="card-title">{{hot.city}}</h3>
+    <h3 class="card-title">{{hot.direction}}</h3>
+
+
+
+
+
+    <div class="container">
+      <div class="row">
+
+        <div class="col">
+          <p>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseExample'+i"
+            aria-expanded="false" aria-controls="collapseExample" (click)="obtenerEventos(hot._id)">
+              Eventos
+            </button>
+          </p>
+          <div class="collapse" [id]="'collapseExample'+i">
+            <div class="card card-body" >
+              <p *ngFor="let sv of Events"><i class="bi bi-caret-right"></i>{{sv.name}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <p>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#service'+i"
+            aria-expanded="false" aria-controls="collapseExample" (click)="obtenerServicio(hot._id)">
+              Servicios
+            </button>
+          </p>
+          <div class="collapse" [id]="'service'+i">
+            <div class="card card-body" >
+              <p *ngFor="let s of service"><i class="bi bi-caret-right"></i>{{s.service}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>
+
+</div>

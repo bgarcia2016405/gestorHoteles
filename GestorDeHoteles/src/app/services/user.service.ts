@@ -39,4 +39,36 @@ export class UserService {
 
   return this.http.post(this.url + '/createUser', params, {headers: this.headers})
  }
+
+
+ obtenerUsuarioId(token,id:String): Observable<any>{
+  let headers = this.headers.set('Authorization',token)
+
+  return this.http.get(this.url + '/showUserId/' + id, {headers: this.headers})
+ }
+
+ editarUsuario(usuario: User): Observable<any>{
+  let token = this.headers.set('Authorization', this.getToken())
+  let params = JSON.stringify(usuario);
+  return this.http.put(this.url + '/editUser', params, {headers: token} )
+ }
+
+ eliminarUsuario(id:String): Observable<any>{{
+  let token = this.headers.set('Authorization', this.getToken())
+  return this.http.delete(this.url + '/dropUser', {headers: token})
+ }}
+
+ usuarioManager(): Observable<any>{
+   return this.http.get(this.url + '/userManager', {headers:this.headers})
+ }
+
+ getToken(){
+  var token2 = localStorage.token;
+  if(token2 != undefined){
+    this.token = token2;
+  }else{
+    this.token = null
+  }
+  return this.token
+}
 }
