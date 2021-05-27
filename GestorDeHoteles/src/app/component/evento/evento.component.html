@@ -1,0 +1,87 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+      <form>
+
+        <div class="form-floating" >
+          <select class="form-select" id="name" name="name"  #name="ngModel" [(ngModel)]="typoEvento.name">
+      <option value="Cumple Años">Cumple Años</option>
+      <option value="Bodas">Bodas</option>
+      <option value="Conferencia">Conferencia</option>
+      <option value="Evento Cultural">Evento Cultural</option>
+      <option value="Evento Gastronómico">Evento Gastronómico</option>
+      <option value="Fiestas">Fiestas</option>
+      <option value="Evento Religioso">Evento Religioso</option>
+          </select>
+          <label for="name">Eventos</label>
+        </div><br>
+
+        <button type="button" class="btn btn-success" (click)="showhotel()">Buscar</button>
+      </form>
+    </div>
+    <div class="col">
+
+    </div>
+  </div><br>
+<div *ngIf=" state === 'true'">
+  <table class="table table-hover" >
+  <thead>
+
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Hotel</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Reservar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hot of typoEvento; let i = index">
+      <th scope="row">{{i}}</th>
+      <td >
+        <img src="{{hot.hotel.imagen}}" style="width:100px">{{hot.hotel.name}}
+      </td>
+      <td>
+        {{hot.price}}
+      </td>
+
+        <td >
+          <button type="button" class="btn btn-outline-danger" (click)="showEventDate(hot._id)" >Reservar</button>
+          </td>
+
+
+    </tr>
+
+  </tbody>
+
+
+
+</table>
+</div>
+
+<div *ngIf="state === 'false'">
+  <div class="container">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+
+      <form >
+
+      </form>
+
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+</div>
+

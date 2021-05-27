@@ -8,7 +8,7 @@ var api = express.Router();
 
 api.post('/createService',  authenticated.ensureAuth, serviceController.add);
 
-api.put('/addService/:idReservation/:idService', authenticated.ensureAuth, serviceController.serviceReservation);
+api.put('/addService/:idReservation/:idService',  serviceController.serviceReservation);
 
 api.get('/showServiceHotel',authenticated.ensureAuth, serviceController.showServiceHotel)
 

@@ -1,0 +1,25 @@
+<form>
+<div class="form-floating">
+  <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="_id" #_id="ngModel" [(ngModel)]="hotelPosrt._id">
+    <option *ngFor="let hot of hotel" value="{{hot._id}}">{{hot.name}}</option>
+  </select>
+  <label for="floatingSelect">Hotel</label>
+</div><br>
+
+<button type="button" class="btn btn-success" (click)="buscar()">Success</button>
+</form>
+
+
+
+<div>
+  <div>
+    <div style="display: block">
+      <canvas baseChart
+        [data]="doughnutChartData"
+        [labels]="doughnutChartLabels"
+        [chartType]="doughnutChartType">
+      </canvas>
+    </div>
+  </div>
+</div>
+

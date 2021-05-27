@@ -1,4 +1,61 @@
 
+<div class="container">
+  <div class="row">
+    <div class="col"  *ngIf="state === 'true'">
+      <div class="card" style="width: 18rem;">
+        <img src="{{hotel.imagen}}" class="card-img-top" >
+        <div class="card-body">
+          <h5 class="card-title">{{hotel.name}}</h5>
+          <p class="card-text">{{hotel.direction}}</p>
+          <div>
+             <i *ngIf="hotel.star >= 1" class="bi bi-star-fill "></i>
+          <i *ngIf="hotel.star >= 2" class="bi bi-star-fill "></i>
+          <i *ngIf="hotel.star >= 3" class="bi bi-star-fill " ></i>
+          <i *ngIf="hotel.star >= 4" class="bi bi-star-fill "></i>
+          <i *ngIf="hotel.star >= 5" class="bi bi-star-fill "></i>
+          </div>
+
+          <p>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseExample'+i"
+            aria-expanded="false" aria-controls="collapseExample" (click)="obtenerEventos(hotel._id)">
+              Eventos
+            </button>
+          </p>
+          <div class="collapse" [id]="'collapseExample'+i">
+            <div class="card card-body" >
+              <p *ngFor="let sv of Events"><i class="bi bi-caret-right"></i>{{sv.name}}</p>
+            </div>
+          </div>
+          <p>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#service'+i"
+            aria-expanded="false" aria-controls="collapseExample" (click)="obtenerServicio(hotel._id)">
+              Servicios
+            </button>
+          </p>
+          <div class="collapse" [id]="'service'+i">
+            <div class="card card-body" >
+              <p *ngFor="let s of service"><i class="bi bi-caret-right"></i>{{s.service}}</p>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary" [routerLink]="['/hotel', hotel._id]">Go to Hotel</button><br>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+
+    </div>
+    <div class="col">
+      <form >
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="name" #name="ngModel" [(ngModel)]="hotelSearch.name">
+          <label for="floatingInput">Nombre de hotel</label>
+        </div>
+        <button type="button" class="btn btn-info" (click)="hotelName()" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 <div>
@@ -16,7 +73,7 @@
 
 
   <div class="card-body">
-    <img src="{{hot.imagen}}" class="rounded float-end" style="width: 50%;float: right;">
+    <img src="{{hot.imagen}}" class="rounded float-end" style="width: 50%;float: right; ">
     <h3 class="card-title">{{hot.city}}</h3>
     <h3 class="card-title">{{hot.direction}}</h3>
 
@@ -60,7 +117,194 @@
 
 
   </div>
+  <div class="card-footer">
+
+    <button type="button" class="btn btn-primary" [routerLink]="['/hotel', hot._id]">Go to Hotel</button><br>
+
+   <br> <div *ngIf="identidad.type === 'Administrador'"><button type="button" class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#drop" (click)="obtenerIdHotel(hot._id)">Eliminar</button> </div> <br>
+    <div  *ngIf="identidad.type === 'Administrador'"><button type="button"  data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-outline-warning" (click)="obtenerIdHotel(hot._id)">Editar</button></div>
+
+  </div>
 
 </div>
 
 </div>
+
+<div class="modal  " id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="staticBackdropLabel">Editar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="price" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name"
+            name="name" #name="ngModel" [(ngModel)]="hotelEdit.name">
+      </div>
+      <div class="modal-body">
+        <div class="form-floating" >
+          <select class="form-select" id="city" name="city" #city="ngModel" [(ngModel)]="hotelEdit.city">
+  <option value="Alta Verapaz">Alta Verapaz</option>
+  <option value="Baja Verapaz">Baja Verapaz</option>
+  <option value="Chimaltenango">Chimaltenango</option>
+  <option value="Chiquimula">Chiquimula</option>
+  <option value="El Progreso">El Progreso</option>
+  <option value="Escuintla">Escuintla</option>
+  <option value="Guatemala">Guatemala</option>
+  <option value="Huehuetenango">Huehuetenango</option>
+  <option value="Izabal">Izabal</option>
+  <option value="Jalapa">Jalapa</option>
+  <option value="Jutiapa">Jutiapa</option>
+  <option value="Petén">Petén</option>
+  <option value="Quetzaltenango">Quetzaltenango</option>
+  <option value="Quiché">Quiché</option>
+  <option value="Retalhuleu">Retalhuleu</option>
+  <option value="Sacatepéquez">Sacatepéquez</option>
+  <option value="San Marcos">San Marcos</option>
+  <option value="Santa Rosa">Santa Rosa</option>
+  <option value="Sololá">Sololá</option>
+  <option value="Suchitepéquez">Suchitepéquez</option>
+  <option value="Totonicapán">Totonicapán</option>
+  <option value="Zacapa">Zacapa</option>
+          </select>
+          <label for="floatingSelect">Departamento</label>
+        </div>
+      </div>
+      <div class="modal-body">
+        <label for="price" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direction"
+            name="direction" #direction="ngModel" [(ngModel)]="hotelEdit.direction">
+      </div>
+      <div class="modal-body">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="imagen" name="imagen"  #imagen="ngModel" [(ngModel)]="hotelEdit.imagen"></textarea>
+          <label for="floatingTextarea">Imagen</label>
+        </div>
+      </div><br>
+
+      <div class="container">
+        <label for="floatingTextarea">Estrellas</label><br>
+        <div class="row">
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+        </div>
+      </div>
+
+      <input type="range" class="form-range" min="1" max="5" id="star" name="star"  #star="ngModel" [(ngModel)]="hotelEdit.star">
+      <div class="modal-footer">
+        <button type="button" class="btn  btn-outline-info" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="editHotel(hotelEdit._id)"  >Editar</button>
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="modal  " id="drop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="staticBackdropLabel">Eliminar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="price" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name"
+            name="name" #name="ngModel" [(ngModel)]="hotelEdit.name" disabled>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating" >
+          <select class="form-select" id="city" name="city" #city="ngModel" [(ngModel)]="hotelEdit.city" disabled>
+  <option value="Alta Verapaz">Alta Verapaz</option>
+  <option value="Baja Verapaz">Baja Verapaz</option>
+  <option value="Chimaltenango">Chimaltenango</option>
+  <option value="Chiquimula">Chiquimula</option>
+  <option value="El Progreso">El Progreso</option>
+  <option value="Escuintla">Escuintla</option>
+  <option value="Guatemala">Guatemala</option>
+  <option value="Huehuetenango">Huehuetenango</option>
+  <option value="Izabal">Izabal</option>
+  <option value="Jalapa">Jalapa</option>
+  <option value="Jutiapa">Jutiapa</option>
+  <option value="Petén">Petén</option>
+  <option value="Quetzaltenango">Quetzaltenango</option>
+  <option value="Quiché">Quiché</option>
+  <option value="Retalhuleu">Retalhuleu</option>
+  <option value="Sacatepéquez">Sacatepéquez</option>
+  <option value="San Marcos">San Marcos</option>
+  <option value="Santa Rosa">Santa Rosa</option>
+  <option value="Sololá">Sololá</option>
+  <option value="Suchitepéquez">Suchitepéquez</option>
+  <option value="Totonicapán">Totonicapán</option>
+  <option value="Zacapa">Zacapa</option>
+          </select>
+          <label for="floatingSelect">Departamento</label>
+        </div>
+      </div>
+      <div class="modal-body">
+        <label for="price" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direction"
+            name="direction" #direction="ngModel" [(ngModel)]="hotelEdit.direction" disabled>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="imagen" name="imagen"  #imagen="ngModel" [(ngModel)]="hotelEdit.imagen" disabled></textarea>
+          <label for="floatingTextarea">Imagen</label>
+        </div>
+      </div><br>
+
+      <div class="container">
+        <label for="floatingTextarea">Estrellas</label><br>
+        <div class="row">
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="col">
+            <i class="bi bi-star-fill"></i>
+          </div>
+        </div>
+      </div>
+
+      <input type="range" class="form-range" min="1" max="5" id="star" name="star"  #star="ngModel" [(ngModel)]="hotelEdit.star" disabled>
+      <div class="modal-footer">
+        <button type="button" class="btn  btn-outline-info" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="dropHotel(hotelEdit._id)"  >Eliminar</button>
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+

@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
 
    }
 
+
   ngOnInit(): void {
   }
 
@@ -31,9 +32,12 @@ export class NavbarComponent implements OnInit {
     this.userService.login(this.userModel).subscribe(
       response=>{
         console.log(response)
+        this.refresh()
         this.identidad = response.userFound
         localStorage.setItem('identidad', JSON.stringify(this.identidad))
         this.getToken();
+        this.token=response.token;
+        localStorage.setItem('token', JSON.stringify(this.token));
       },
       error=>{
         console.log(<any>error);
@@ -51,8 +55,9 @@ export class NavbarComponent implements OnInit {
   getToken(){
     this.userService.login(this.userModel).subscribe(
       response=>{
+        console.log(response)
         this.token=response.token;
-        localStorage.setItem('token', this.token);
+        localStorage.setItem('token', JSON.stringify(this.token));
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -66,6 +71,10 @@ export class NavbarComponent implements OnInit {
 
   navegarCuenta(idUsuario){
     this.router.navigate(['/cuenta', idUsuario])
+  }
+
+  refresh(): void{
+    window.location.reload();
   }
 }
 

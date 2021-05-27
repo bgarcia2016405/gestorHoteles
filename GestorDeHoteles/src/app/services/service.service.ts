@@ -42,6 +42,11 @@ export class ServiceService {
     return this.http.delete(this.url + '/dropService/' + idServicio, {headers: token})
   }
 
+  serviceReservation(idReservation,idService): Observable<any>{
+    let token = this.headers.set('Authorization', this.getToken())
+    return this.http.put(this.url + '/addService/' + idReservation + "/" + idService, {headers: token})
+  }
+
   getToken(){
     var token2 = localStorage.token;
     if(token2 != undefined){

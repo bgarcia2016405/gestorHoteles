@@ -7,13 +7,14 @@ const bodyParser = require("body-parser");
 
 //////////////////////////////////////////////////
 
+const bill_rutes = require("./src/rutes/bill.rutes")
 const user_rutes = require("./src/rutes/user.rutes");
 const room_rutes = require("./src/rutes/room.rutes");
 const hotel_rutes = require("./src/rutes/hotel.rutes");
 const event_rutes = require("./src/rutes/event.rutes");
 const service_rutes = require("./src/rutes/service.rutes");
 const typeEvent_rutes = require("./src/rutes/typeEvet.rutes");
-const reservation_rutes = require("./src/rutes/reservation.model");
+const reservation_rutes = require("./src/rutes/reservation.rutes");
 
 ////////////////////////////////////////////////
 
@@ -23,7 +24,8 @@ app.use(cors());
 
 ///////////////////////////////////////////////
 
-app.use('/api', user_rutes, 
+app.use('/api', bill_rutes,
+                user_rutes, 
                 room_rutes,
                 hotel_rutes,  
                 event_rutes, 

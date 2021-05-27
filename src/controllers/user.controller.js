@@ -10,6 +10,11 @@ const user = 'Cliente';
 const manager = 'Gerente';
 const admin = 'Administrador';
 
+const reservate = 'Reservado';
+const curso = 'Curso';
+const terminado = 'Finalizado';
+const cancelado = ' Cancelado';
+
 function Login(req,res){
     var params = req.body;
     
@@ -125,8 +130,8 @@ function findUserId(req,res){
 ////////////////////////////MANAGER////////////////////////////////////////////////////////  
 
 function findUserHotel(req, res){
-    var user = req.user.sub;
-
+    
+    
 
 }
 

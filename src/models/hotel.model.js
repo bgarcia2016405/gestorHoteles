@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var HotelSchema = Schema({
     name:String,
     star: Number,
-    contry: String,
+    stack: Number,
+    cancel: Number,
     city: String,
     direction:String,
     imagen:String,

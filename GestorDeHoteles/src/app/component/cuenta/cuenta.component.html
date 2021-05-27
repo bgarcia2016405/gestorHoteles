@@ -52,6 +52,147 @@
   </div>
 </div>
 
+<div class="container">
+  <br>
+  <br>
+  <div class="row">
+
+
+    </div>
+    <div class="col">
+      <table class="table table-dark table-striped">
+
+        <thead>
+
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Entrada</th>
+            <th scope="col">Salida</th>
+            <th scope="col">Servicios</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of reservation">
+            <th scope="row">{{i}}</th>
+            <td >{{r.state}}</td>
+            <td > <mat-form-field>
+              <input matInput [matDatepicker]="checkIn" value="{{r.checkIn}}"  disabled>
+              <mat-datepicker-toggle matSuffix [for]="checkIn" disabled></mat-datepicker-toggle >
+              <mat-datepicker #checkIn > </mat-datepicker>
+            </mat-form-field></td>
+            <td><mat-form-field>
+              <input matInput [matDatepicker]="CheckOut" value="{{r.checkOut}}"  disabled>
+              <mat-datepicker-toggle matSuffix [for]="CheckOut" disabled></mat-datepicker-toggle >
+              <mat-datepicker #CheckOut > </mat-datepicker>
+            </mat-form-field></td>
+            <td >
+              <select >
+                <option class="form-select" aria-label="Default select example" *ngFor="let g of r.services; let i = index ">{{g.service}}</option>
+              </select>
+            </td>
+
+
+              <td >
+                <div >
+                  <button *ngIf="r.state === 'Reservado'" type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#servicio" (click)="obtenerServicios(r.room.hotel, r._id)">Agregar Servicio</button><br>
+                  <button *ngIf="r.state === 'Curso' || r.state === 'Finalizado' || r.state === 'Reservado'"  type="button" class="btn btn-outline-info"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="showBill(r._id)" >Factura</button><br>
+                  <button *ngIf="r.state === 'Curso' || r.state === 'Finalizado' || r.state === 'Reservado'"  type="button" class="btn btn-outline-info" (click)="generateBill(r._id)" >Generar</button><br>
+                  <button *ngIf="r.state === 'Reservado'" type="button" class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#cancelar" (click)="obtenerReservacion(r._id)">Cancelar</button>
+
+                </div>
+                </td>
+
+
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+    <div class="col-1">
+
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Factura</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h3>Hotel: <p>{{this.room.hotel.name}}</p></h3>
+          .....................................................................................
+          <h3>Cuarto:   </h3>
+          <p>Camas: {{this.room.beds}}</p>
+          <p>Precio: Q{{this.room.price}}</p>
+          <p>
+            Entrada:
+            <mat-form-field>
+              <input matInput [matDatepicker]="checkIn" value="{{serviciosFac.checkIn}}"  disabled>
+              <mat-datepicker-toggle matSuffix [for]="checkIn" disabled></mat-datepicker-toggle >
+              <mat-datepicker #checkIn > </mat-datepicker>
+            </mat-form-field>
+          </p>
+          <p>
+            Salida:
+            <mat-form-field>
+              <input matInput [matDatepicker]="checkIn" value="{{serviciosFac.checkOut}}"  disabled>
+              <mat-datepicker-toggle matSuffix [for]="checkIn" disabled></mat-datepicker-toggle >
+              <mat-datepicker #checkIn > </mat-datepicker>
+            </mat-form-field>
+          </p>
+          <p>Dias:  {{bill.days}}</p>
+          <p>Sub-total:  {{bill.days * this.room.price}}</p>
+          .....................................................................................
+          <h3>Servicios:   </h3>
+
+          <p *ngFor="let s of serviciosFac.services"> {{s.service}} :  Q{{s.price}} </p>
+          .....................................................................................
+          <h3>Total:  Q{{bill.total}}</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ModalServicio -->
+<div class="modal fade" id="servicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Servicios</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form >
+ <div class="modal-body">
+  <select class="form-select" id="_id" name="_id"  #_id="ngModel" [(ngModel)]="serviceEdit._id"   >
+      <option value=""></option>
+      <option *ngFor="let ss of service" value="{{ss._id}}">  {{ss.service}}</option>
+        </select>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="capturar()" >Agregar</button>
+      </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -112,4 +253,25 @@
     </div>
   </div>
 </div>
+
+  <!-- ModalCancelar -->
+  <div class="modal fade" id="cancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Reservación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+   <div class="modal-body">
+      <h2>¿Quieres cancelar esta reservación?</h2>
+      <p style="color:#BCBB1D"> No se podra revertir</p>
+    </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" data-bs-dismiss="modal">No</button>
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="cancelarReservation()">Si</button>
+  </div>
+  </div>
+
 

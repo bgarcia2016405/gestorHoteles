@@ -62,3 +62,71 @@
 
 
 
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4" *ngFor="let rm of room">
+      <div class="card" style="width: 18rem;">
+        <img src="{{rm.hotel.imagen}}" class="card-img-top" alt="...">
+        <div class="card-body"><div class="container">
+          <div class="row">
+            <h2 class="card-title">{{rm.hotel.name}}</h2>
+            <div class="col">
+              <h3>Precio</h3>
+              <p class="card-text">Q{{rm.price}}</p>
+            </div>
+            <div class="col">
+              <h3>Camas</h3>
+          <p class="card-text">{{rm.beds}}</p>
+            </div>
+            <div class="col">
+              <h3>Personas</h3>
+          <p class="card-text">{{rm.persons}}</p>
+            </div>
+          </div>
+        </div>
+          <a data-bs-toggle="modal"
+          data-bs-target="#modalReservation" class="btn btn-outline-info" (click)="buscarId(rm._id)" >Reservar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!--Modal-->
+<div class="modal fade modal-dialog modal-sm modal fade" id="modalReservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="a">Reservar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div>
+
+      </div>
+      <div class="modal-body ">
+        <form>
+          <div class="mb-3">
+            <mat-form-field>
+              <input matInput [matDatepicker]="reservationIn" placeholder="Entrada" name="CheckIn"  #CheckIn="ngModel" [(ngModel)]="reservation.checkIn" disabled  >
+              <mat-datepicker-toggle matSuffix [for]="reservationIn" ></mat-datepicker-toggle>
+              <mat-datepicker #reservationIn ></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="reservationOut" placeholder="Salida" name="checkOut"  #checkOut="ngModel" [(ngModel)]="reservation.checkOut" disabled  >
+              <mat-datepicker-toggle matSuffix [for]="reservationOut" ></mat-datepicker-toggle>
+              <mat-datepicker #reservationOut ></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </form>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="registrar()" >Reservar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

@@ -28,8 +28,11 @@
         <li *ngIf="identidad.type === 'Gerente'">
           <a class="nav-link" routerLink="/cuarto"  >Habitación</a>
         </li>
-        <li *ngIf="identidad.type === 'Gerente'">
-          <a class="nav-link" routerLink="/cuarto"  >Mi Hotel</a>
+        <li *ngIf="identidad.type === 'Administrador'">
+          <a class="nav-link" routerLink="/usuario"  >Usuarios</a>
+        </li>
+        <li *ngIf="identidad.type === 'Administrador'">
+          <a class="nav-link" routerLink="/reportes"  >Reportes</a>
         </li>
       </ul>
       <div class="dropdown">
@@ -46,7 +49,6 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/registro"  >Registro</a>
           </li>
-          <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
         </ul>
       </div>
       <div >

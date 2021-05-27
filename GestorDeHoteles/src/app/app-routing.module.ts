@@ -8,6 +8,10 @@ import { ServicioComponent } from './component/servicio/servicio.component';
 import { TypoEventosComponent } from './component/typo-eventos/typo-eventos.component';
 import { RoomsComponent } from './component/rooms/rooms.component';
 import { RegistroCuartoComponent } from './component/registro-cuarto/registro-cuarto.component';
+import { HotelComponent } from './component/hotel/hotel.component';
+import { EventoComponent } from './component/evento/evento.component';
+import { UsuarioComponent } from './component/usuario/usuario.component';
+import { ReportsComponent } from './component/reports/reports.component';
 
 
 const routes: Routes = [
@@ -18,7 +22,11 @@ const routes: Routes = [
   { path: 'servicios', component: ServicioComponent},
   { path: 'tipoEventos', component: TypoEventosComponent},
   { path: 'cuartos', component: RoomsComponent},
-  { path: 'cuarto', component: RegistroCuartoComponent}
+  { path: 'cuarto', component: RegistroCuartoComponent},
+  { path: 'hotel/:idHotel', component: HotelComponent},
+  { path: 'evento', component: EventoComponent},
+  { path: 'usuario', component:UsuarioComponent},
+  { path: 'reportes', component: ReportsComponent},
 ];
 
 @NgModule({

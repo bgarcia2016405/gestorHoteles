@@ -29,8 +29,8 @@ export class RegistroCuartoComponent implements OnInit {
     private hotelService: HotelService
   ) {
     this.token = this.userService.getToken();
-    this.room = new Room("","",0,0,0)
-    this.hotelPost = new Hotel("","",0,"","","","","");
+    this.room = new Room("","",0,"",0,0)
+    this.hotelPost = new Hotel("","",0,0,"","","","","");
   }
 
   ngOnInit(): void {

@@ -44,15 +44,14 @@ function serviceReservation(req,res){
     var params = req.body;
     var reservation = req.params.idReservation;
     var service = req.params.idService;
-    var validation = req.user.type;
     
-
     reservationModel.findOne({_id : reservation }, (err,reservatrionFound)=>{
         for(let i=0; i<reservatrionFound.services.length; i++){
             if(reservatrionFound.services[i]==service){
-                return res.status(200).send({report: 'Service has exist in your reservation'})
+                return res.status(404).send({report: 'Service has exist in your reservation'})
             }
         }
+
             reservationModel.findOneAndUpdate({_id :reservation},
                 {$push:{services:service}}, {new:true},(err,reservationUpdate) =>{
                     if(err) return res.status(404).send({report:'Error in update service'});
@@ -60,7 +59,7 @@ function serviceReservation(req,res){
                     if(!reservationUpdate) return res.status(202).send({report: 'error request in update service'});
 
                     return res.status(200).send(reservationUpdate)
-                }).populate('services', 'service')
+                })
         
     })
 

@@ -20,7 +20,7 @@ export class RegistroHotelComponent implements OnInit {
     private hotelService: HotelService,
     private userService: UserService
   ) {
-    this.hotelModelAdd = new Hotel("","",0,"","","","","");
+    this.hotelModelAdd = new Hotel("","",0,0,"","","","","");
     {this.token = this.userService.getToken();}
   }
 

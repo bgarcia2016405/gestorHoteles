@@ -26,7 +26,7 @@ export class TypoEventosComponent implements OnInit {
 
   ) {
     this.token = this.userService.getToken();
-    this.hotelPosrt = new Hotel("","",0,"","","","","")
+    this.hotelPosrt = new Hotel("","",0,0,"","","","","")
     this.typoEvento = new typeServicio("","",0,"")
    }
 
@@ -38,6 +38,7 @@ export class TypoEventosComponent implements OnInit {
   refresh(): void{
     window.location.reload();
   }
+
   showHotel(){
     this.hotelService.showHotel().subscribe(
       response =>{

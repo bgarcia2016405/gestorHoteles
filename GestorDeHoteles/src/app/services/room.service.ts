@@ -49,6 +49,10 @@ export class RoomService {
     return this.http.post(this.url + '/searchRoomDate', params, {headers: this.headers})
    }
 
+   showReservationRoom(idRoom): Observable<any>{
+     return this.http.get(this.url + '/showReservationRoom/' + idRoom, {headers: this.headers})
+   }
+
    getToken(){
     var token2 = localStorage.token;
     if(token2 != undefined){

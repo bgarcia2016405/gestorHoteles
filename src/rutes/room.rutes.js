@@ -12,6 +12,7 @@ api.get('/showId/:idRoom', roomController.showId)
 api.put('/editarRoom/:idRoom', roomController.editar)
 api.delete('/eliminarRoom/:idRoom', roomController.eliminar)
 api.post('/searchRoomDate', roomController.searchRoomDate)
+api.get('/showReservationRoom/:idRoom', roomController.showReservationRoom)
 
 
 module.exports = api;

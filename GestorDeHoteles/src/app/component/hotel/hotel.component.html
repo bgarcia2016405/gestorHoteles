@@ -1,0 +1,146 @@
+
+<div class="container">
+  <div>
+    <h1>Hotel {{hotel.name}}</h1>
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="col">
+      <img src="{{hotel.imagen}}" alt="" class="img-thumbnail">
+
+    </div>
+    <div class="col">
+      <h2>{{hotel.city}}</h2>
+      <h2>{{hotel.direction}}</h2>
+    </div>
+    <div class="col">
+      <h2>Valoración</h2>
+      <i *ngIf="hotel.star >= 1" class="bi bi-star-fill "></i>
+      <i *ngIf="hotel.star >= 2" class="bi bi-star-fill "></i>
+      <i *ngIf="hotel.star >= 3" class="bi bi-star-fill " ></i>
+      <i *ngIf="hotel.star >= 4" class="bi bi-star-fill "></i>
+      <i *ngIf="hotel.star >= 5" class="bi bi-star-fill "></i>
+    </div>
+
+  </div><br><br>
+
+  <h2>Cuartos</h2>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4" *ngFor="let rm of room">
+        <div class="card" style="max-width: 25rem; margin-top: 15px;">
+          <img src="https://image.freepik.com/vector-gratis/cama-almohada-azul-sabana_1308-11383.jpg" class="card-img-top">
+          <div class="card-body"><div class="container">
+            <div class="row">
+              <h2 class="card-title">{{rm.hotel.name}}</h2>
+              <div class="col">
+                <h3>Precio</h3>
+                <p class="card-text">Q{{rm.price}}</p>
+              </div>
+              <div class="col">
+                <h3>Camas</h3>
+            <p class="card-text">{{rm.beds}}</p>
+              </div>
+              <div class="col">
+                <h3>Personas</h3>
+            <p class="card-text">{{rm.persons}}</p>
+              </div>
+            </div>
+          </div>
+            <btn  class="btn btn-outline-info"  type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseExample'+rm._id" aria-expanded="true" [attr.aria-controls]="'collapseExample'+rm_id"  >Reservar</btn>
+          </div>
+          <div class="collapse" [id]="'collapseExample'+rm._id">
+            <div class="card card-body">
+              <form>
+                <div class="mb-3">
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="reservationIn" placeholder="Entrada" name="checkIn"  #checkIn="ngModel" [(ngModel)]="reservationModel.checkIn"   >
+                    <mat-datepicker-toggle matSuffix [for]="reservationIn" ></mat-datepicker-toggle>
+                    <mat-datepicker #reservationIn ></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="reservationOut" placeholder="Salida" name="checkOut"  #checkOut="ngModel" [(ngModel)]="reservationModel.checkOut"   >
+                    <mat-datepicker-toggle matSuffix [for]="reservationOut" ></mat-datepicker-toggle>
+                    <mat-datepicker #reservationOut ></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </form>
+                <button type="button" class="btn btn-secondary" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseExample'+rm._id" aria-expanded="true" [attr.aria-controls]="'collapseExample'+rm_id">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="create(rm._id,identidad._id)" >Reservar</button>
+            </div>
+          </div>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush'+rm._id" aria-expanded="false" aria-controls="flush-collapseOne" (click)="showReservationRoom(rm._id)">
+                  Reservaciónes
+                </button>
+              </h2>
+              <div [id]="'flush'+rm._id" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body" *ngFor="let r of reservation">
+
+                  <div class="container">
+                    <div class="row row-cols-2">
+                      <div class="col-4" >Entrada</div>
+                      <div class="col"><input matInput [matDatepicker]="hooa" placeholder="{{r.checkIn}}" value="{{r.checkIn}}" disabled> </div>
+                      <div class="col-4" >Salida</div>
+                      <div class="col"><input matInput [matDatepicker]="hooa" placeholder="{{r.checkIn}}" value="{{r.checkOut}}" disabled> </div>
+                    </div>
+                  </div><hr>
+
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+<!--Modal-->
+<div class="modal fade" id="modalReservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="a">Reservar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div>
+
+      </div>
+      <div class="modal-body ">
+        <form>
+          <div class="mb-3">
+            <mat-form-field>
+              <input matInput [matDatepicker]="reservationIn" placeholder="Entrada" name="CheckIn"  #CheckIn="ngModel" [(ngModel)]="reservation.checkIn"   >
+              <mat-datepicker-toggle matSuffix [for]="reservationIn" ></mat-datepicker-toggle>
+              <mat-datepicker #reservationIn ></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="reservationOut" placeholder="Salida" name="checkOut"  #checkOut="ngModel" [(ngModel)]="reservation.checkOut"   >
+              <mat-datepicker-toggle matSuffix [for]="reservationOut" ></mat-datepicker-toggle>
+              <mat-datepicker #reservationOut ></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </form>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Reservar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

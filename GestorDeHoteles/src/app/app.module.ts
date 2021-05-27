@@ -21,6 +21,14 @@ import { TypoEventosComponent } from './component/typo-eventos/typo-eventos.comp
 import { LateralNavbarComponent } from './component/lateral-navbar/lateral-navbar.component';
 import { RoomsComponent } from './component/rooms/rooms.component';
 import { RegistroCuartoComponent } from './component/registro-cuarto/registro-cuarto.component';
+import { HotelComponent } from './component/hotel/hotel.component';
+import { EventoComponent } from './component/evento/evento.component';
+import { UsuarioComponent } from './component/usuario/usuario.component';
+import { FacturasComponent } from './component/facturas/facturas.component';
+import { ReportsComponent } from './component/reports/reports.component';
+import { ChartsModule } from 'ng2-charts';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +41,12 @@ import { RegistroCuartoComponent } from './component/registro-cuarto/registro-cu
     TypoEventosComponent,
     LateralNavbarComponent,
     RoomsComponent,
-    RegistroCuartoComponent
+    RegistroCuartoComponent,
+    HotelComponent,
+    EventoComponent,
+    UsuarioComponent,
+    FacturasComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +57,8 @@ import { RegistroCuartoComponent } from './component/registro-cuarto/registro-cu
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

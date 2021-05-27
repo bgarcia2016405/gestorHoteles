@@ -12,6 +12,7 @@ export class HotelService {
   public headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   public token;
+  public hotel2
   constructor(public http: HttpClient) {
     this.url = GLOBAL.url;
    }
@@ -41,6 +42,44 @@ export class HotelService {
     let token = this.headers.set('Authorization', this.getToken());
     return this.http.get(this.url + '/showHotel', {headers:token})
   }
+
+  hotel(idHotel): Observable<any>{
+    return this.http.get(this.url + '/hotel/' + idHotel, {headers:this.headers})
+  }
+
+  editHotel(idHotel, hotel:Hotel): Observable<any>{
+    let params = JSON.stringify(hotel);
+    let token = this.headers.set('Authorization',this.getToken());
+
+    return this.http.put(this.url + '/editHotel/' + idHotel, params,{headers: token})
+
+  }
+
+  dropHotel(idHotel): Observable<any>{
+    let token = this.headers.set('Authorization',this.getToken());
+    return this.http.delete(this.url + '/eliminarHotel/' + idHotel, {headers:token})
+  }
+
+  hotelName(hotel): Observable<any>{
+    let params = JSON.stringify(hotel);
+    return this.http.post(this.url + '/hotelName', params, {headers: this.headers})
+  }
+
+  report(): Observable<any>{
+    let token = this.headers.set('Authorization',this.getToken());
+    return this.http.get(this.url + '/report',{headers: token})
+  }
+
+  getHotelSelected(){
+    let hotel1 = JSON.parse(localStorage.getItem('hotel'));
+    if(hotel1 != undefined || hotel1 != null){
+      this.hotel2 = hotel1
+    }else{
+      this.hotel2 = null;
+    }
+    return this.hotel2;
+  }
+
 
 }
 

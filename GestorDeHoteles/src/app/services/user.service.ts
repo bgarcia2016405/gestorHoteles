@@ -62,6 +62,12 @@ export class UserService {
    return this.http.get(this.url + '/userManager', {headers:this.headers})
  }
 
+ showAllUser(): Observable<any>{
+  let token = this.headers.set('Authorization', this.getToken())
+   return this.http.get(this.url + '/showAllUser', {headers:token})
+ }
+
+
  getToken(){
   var token2 = localStorage.token;
   if(token2 != undefined){
@@ -71,4 +77,6 @@ export class UserService {
   }
   return this.token
 }
+
+
 }

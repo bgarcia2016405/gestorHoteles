@@ -3,6 +3,7 @@ export class Hotel{
     public _id: String,
     public name: String,
     public star:Number,
+    public cancel:Number,
     public direction: String,
     public contry: String,
     public city: String,

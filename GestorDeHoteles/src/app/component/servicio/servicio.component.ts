@@ -28,7 +28,7 @@ export class ServicioComponent implements OnInit {
     this.token = this.userService.getToken();
     this.servisio = new Service("","","",0);
     this.serviceEdit = new Service("","","",0);
-    this.hotelPost = new Hotel("","",0,"","","","","");
+    this.hotelPost = new Hotel("","",0,0,"","","","","");
    }
 
   ngOnInit(): void {
